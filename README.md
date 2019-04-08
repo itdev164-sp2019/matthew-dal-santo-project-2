@@ -6,10 +6,10 @@ Project to test the local-storage npm module as a test case for Project 3 using 
 ## Project Planning
 
 ### Story Board
-[local-storage Proof Story Board]()
+[local-storage Proof Story Board](https://github.com/itdev164-sp2019/matthew-dal-santo-project-2/projects/1)
 
 ### Issues
-[Issue 1]()
+[As a Developer Who Needs a Working Proof, I Need a Framework for a Mock Comments Page](https://github.com/itdev164-sp2019/matthew-dal-santo-project-2/issues/2)
 
-[Issue 2]()
+[As a Developer Who Needs a Working Proof, I Need to Validate that local-storage Will Work](https://github.com/itdev164-sp2019/matthew-dal-santo-project-2/issues/3)
 
