@@ -8,7 +8,8 @@ Project to test the local-storage npm module as a test case for Project 3 using 
 **Project Features**
 
 - Project will mock a comments section.
-- Comments will not have 
+- Comments will not have a reply option.
+- Comments will be a component.
 
 ## Project Planning
 
