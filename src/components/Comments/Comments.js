@@ -28,15 +28,29 @@ const defaultMessage = ' ';
 
 export class Comments extends Component {
 
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         commentSubmit: [
+    //             {
+    //                 name: defaultName,
+    //                 location: defaultLocation,
+    //                 message: defaultMessage
+    //             }
+    //         ],
+    //         comments: []
+    //     }
+    // }
+
     state = {
         commentSubmit: [
             {
-                name: defaultName,
-                location: defaultLocation,
-                message: defaultMessage
+                name: this.defaultName,
+                location: this.defaultLocation,
+                message: this.defaultMessage
             }
         ],
-        comments: []
+        comments: [],
     }
 
     // constructor(props) {

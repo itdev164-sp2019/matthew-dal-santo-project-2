@@ -5,8 +5,6 @@ const images = {
 }
 
 const icons = {
-  Menu: <Menu />,
-  Search: <Search />
 }
 
 const breakpoints = [576, 768, 900]
@@ -115,14 +113,6 @@ const theme = {
       },
       contrast: {
         color: theme.colors.primary.contrastText
-      }
-    },
-    mastheadDrawer: {
-      primary: {
-        background: theme.colors.primary.main
-      },
-      contrast: {
-        background: theme.colors.primary.contrastText
       }
     },
     text: {
