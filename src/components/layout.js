@@ -26,6 +26,7 @@ const defaultMessage = 'Enter your comment here...';
 export default class Layout extends React.Component {
 
   resetSubmit = this.resetSubmit.bind(this);
+  submitComment = this.submitComment.bind(this);
   commentNumberDisplay = this.commentNumberDisplay.bind(this);
   changeName = this.changeName.bind(this);
   changeLocation = this.changeLocation.bind(this);
@@ -40,25 +41,25 @@ export default class Layout extends React.Component {
   };
 
   changeName(inputName) {
-    this.setState( {
+    this.setState({
         submitName: inputName
     }) 
   }
 
   changeLocation(inputLocation) {
-    this.setState( {
+    this.setState({
       submitLocation: inputLocation
     })
   }
 
   changeMessage(inputMessage) {
-    this.setState( {
+    this.setState({
         submitMessage: inputMessage
     })
   }
 
   resetSubmit() {
-      this.setState( {
+      this.setState({
         submitName: defaultName,
         submitLocation: defaultLocation,
         submitMessage: defaultMessage
@@ -68,11 +69,28 @@ export default class Layout extends React.Component {
       document.getElementById('message').value = defaultMessage; 
   }
 
+  submitComment() {
+    var updatedComments = this.state.comments;
+    var comment = {
+      key: this.state.comments.length + 1,
+      name: this.state.submitName, 
+      location: this.state.submitLocation, 
+      message: this.state.submitMessage
+    };
+    console.log(comment);
+    updatedComments.push(comment);
+    this.setState({
+      comments: updatedComments
+    })
+
+    this.resetSubmit();
+  }
+
   commentNumberDisplay() {
       if (this.state.comments.length < 1) {
           return 'There are no comments on this article yet.  Be the first to comment!';
       } else {
-          return 'Comments' + this.state.comments.length
+          return 'Comments  ' + this.state.comments.length
       }
   }
 
@@ -97,7 +115,7 @@ export default class Layout extends React.Component {
               <main>{children}</main>
 
               <Comments 
-              defaultName = {defaultName}
+              defaultName={defaultName}
               defaultLocation={defaultLocation}
               defaultMessage={defaultMessage}
               submitName={this.state.submitName}
@@ -105,18 +123,30 @@ export default class Layout extends React.Component {
               submitMessage={this.state.submitMessage}
               comments={this.state.comments}
               resetSubmit={this.resetSubmit}
+              submitComment={this.submitComment}
               commentNumberDisplay={this.commentNumberDisplay} 
               changeName={this.changeName}
               changeLocation={this.changeLocation}
               changeMessage={this.changeMessage} />
 
-              <Box>
+              <Box mx={2}>
                 <Text>Test: {this.state.test}</Text>
                 <Text>Name: {defaultName}</Text>
                 <Text>State Name: {this.state.submitName}</Text>
                 <Text>State Location: {this.state.submitLocation}</Text>
                 <Text>State Message: {this.state.submitMessage}</Text>
+              </Box>
+
+              <Box mt={2}>
+                <Text>Comments:</Text>
+                {this.state.comments.map(comments =>
+                <Box mx={4} my={2}>
+                  <Text>{comments.name}</Text>
+                  <Text>{comments.location}</Text>
+                  <Text>{comments.message}</Text>
                 </Box>
+                )}
+              </Box>
             </div>
           )}
         />

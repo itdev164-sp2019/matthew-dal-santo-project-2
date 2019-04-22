@@ -72,7 +72,7 @@ export class Comments extends Component {
                     </Box>
                     <Flex>
                         <Button onClick={() => this.props.resetSubmit()}>CANCEL</Button>
-                        <Button>SUBMIT</Button>
+                        <Button onClick={() => this.props.submitComment()}>SUBMIT</Button>
                     </Flex>
                 </CommentBody>
 
