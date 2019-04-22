@@ -44,4 +44,4 @@ export class CommentMessage extends Component {
     }
 }
 
-export default CommentMessage;
+//export default CommentMessage;

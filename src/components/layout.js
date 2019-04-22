@@ -17,33 +17,56 @@ import {
 import Header from "./header"
 import "./layout.css"
 
+import {Comments} from "./Comments"
+
 const defaultName = 'Name (required)';
 const defaultLocation = 'Location (required)';
-const defaultMessage = ' ';
+const defaultMessage = 'Enter your comment here...';
 
 export default class Layout extends React.Component {
 
+  resetSubmit = this.resetSubmit.bind(this);
+  commentNumberDisplay = this.commentNumberDisplay.bind(this);
+  changeName = this.changeName.bind(this);
+  changeLocation = this.changeLocation.bind(this);
+  changeMessage = this.changeMessage.bind(this);
+
   state = {
     test: 'true',
-    commentSubmit: 
-        {
-            name: defaultName,
-            location: defaultLocation,
-            message: defaultMessage
-        },
+    submitName: defaultName,
+    submitLocation: defaultLocation,
+    submitMessage: defaultMessage,
     comments: []
   };
 
-  // resetSubmit() {
-  //     this.setState( {
-  //         name: defaultName,
-  //         location: defaultLocation,
-  //         message: defaultMessage
-  //     })
-  //     document.getElementById('name').value = defaultName; 
-  //     document.getElementById('location').value = defaultLocation; 
-  //     document.getElementById('message').value = defaultMessage; 
-  // }
+  changeName(inputName) {
+    this.setState( {
+        submitName: inputName
+    }) 
+  }
+
+  changeLocation(inputLocation) {
+    this.setState( {
+      submitLocation: inputLocation
+    })
+  }
+
+  changeMessage(inputMessage) {
+    this.setState( {
+        submitMessage: inputMessage
+    })
+  }
+
+  resetSubmit() {
+      this.setState( {
+        submitName: defaultName,
+        submitLocation: defaultLocation,
+        submitMessage: defaultMessage
+      })
+      document.getElementById('name').value = defaultName; 
+      document.getElementById('location').value = defaultLocation; 
+      document.getElementById('message').value = defaultMessage; 
+  }
 
   commentNumberDisplay() {
       if (this.state.comments.length < 1) {
@@ -54,6 +77,7 @@ export default class Layout extends React.Component {
   }
 
   render() {
+
     const { children } = this.props;
 
     return(
@@ -71,12 +95,27 @@ export default class Layout extends React.Component {
           render={data => (
             <div>
               <main>{children}</main>
+
+              <Comments 
+              defaultName = {defaultName}
+              defaultLocation={defaultLocation}
+              defaultMessage={defaultMessage}
+              submitName={this.state.submitName}
+              submitLocation={this.state.submitLocation}
+              submitMessage={this.state.submitMessage}
+              comments={this.state.comments}
+              resetSubmit={this.resetSubmit}
+              commentNumberDisplay={this.commentNumberDisplay} 
+              changeName={this.changeName}
+              changeLocation={this.changeLocation}
+              changeMessage={this.changeMessage} />
+
               <Box>
                 <Text>Test: {this.state.test}</Text>
                 <Text>Name: {defaultName}</Text>
-                <Text>State Name: {this.state.commentSubmit.name}</Text>
-                <Text>State Location: {this.state.commentSubmit.location}</Text>
-                <Text>State Message: {this.state.commentSubmit.message}</Text>
+                <Text>State Name: {this.state.submitName}</Text>
+                <Text>State Location: {this.state.submitLocation}</Text>
+                <Text>State Message: {this.state.submitMessage}</Text>
                 </Box>
             </div>
           )}
