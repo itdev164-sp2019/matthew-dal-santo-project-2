@@ -111,7 +111,7 @@ export default class Layout extends React.Component {
             }
           `}
           render={data => (
-            <div>
+            <Box>
               <main>{children}</main>
 
               <Comments 
@@ -129,25 +129,7 @@ export default class Layout extends React.Component {
               changeLocation={this.changeLocation}
               changeMessage={this.changeMessage} />
 
-              <Box mx={2}>
-                <Text>Test: {this.state.test}</Text>
-                <Text>Name: {defaultName}</Text>
-                <Text>State Name: {this.state.submitName}</Text>
-                <Text>State Location: {this.state.submitLocation}</Text>
-                <Text>State Message: {this.state.submitMessage}</Text>
-              </Box>
-
-              <Box mt={2}>
-                <Text>Comments:</Text>
-                {this.state.comments.map(comments =>
-                <Box mx={4} my={2}>
-                  <Text>{comments.name}</Text>
-                  <Text>{comments.location}</Text>
-                  <Text>{comments.message}</Text>
-                </Box>
-                )}
-              </Box>
-            </div>
+            </Box>
           )}
         />
       </ThemeProvider>

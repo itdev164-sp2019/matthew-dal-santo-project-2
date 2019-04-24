@@ -11,7 +11,8 @@ import {
 import styled from 'styled-components'
 //import { Edit } from 'styled-icons/feather'
 
-//import CommentMessage from './CommentMessage'
+import CommentMessages from './CommentMessages'
+import CommentSubmit from './CommentSubmit'
 
 const CommentTitle = styled(Text)`
     text-decoration: none;
@@ -51,30 +52,23 @@ export class Comments extends Component {
 
         return (
             <Box>
-                <CommentBody my={4} p={2}>
-                    <Box>
-                        <Text>{this.props.commentNumberDisplay()}</Text>
-                    </Box>
-                    <Flex>
-                        <input type="text" name="name" id="name"
-                        defaultValue={this.props.defaultName}
-                        onChange={this.onNameChange.bind(this)} />
 
-                        <input type="text" name="location" id="location"
-                        defaultValue={this.props.defaultLocation}
-                        onChange={this.onLocationChange.bind(this)} />
-                    </Flex>
-                    <Box>
-                        <MessageInputBox type="text" name="message" id="message" 
-                        rows="4" cols="50"
-                        defaultValue={this.props.defaultMessage}
-                        onChange={this.onMessageChange.bind(this)} />
-                    </Box>
-                    <Flex>
-                        <Button onClick={() => this.props.resetSubmit()}>CANCEL</Button>
-                        <Button onClick={() => this.props.submitComment()}>SUBMIT</Button>
-                    </Flex>
-                </CommentBody>
+                <CommentSubmit
+                defaultName={this.props.defaultName}
+                defaultLocation={this.props.defaultLocation}
+                defaultMessage={this.props.defaultMessage}
+                submitName={this.props.submitName}
+                submitLocation={this.props.submitLocation}
+                submitMessage={this.props.submitMessage}
+                comments={this.props.comments}
+                resetSubmit={this.props.resetSubmit}
+                submitComment={this.props.submitComment}
+                commentNumberDisplay={this.props.commentNumberDisplay} 
+                changeName={this.props.changeName}
+                changeLocation={this.props.changeLocation}
+                changeMessage={this.props.changeMessage} />
+
+                <CommentMessages comments={this.props.comments}/>
 
             </Box>
         );      
