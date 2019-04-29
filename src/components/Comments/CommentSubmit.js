@@ -11,20 +11,48 @@ import {
 import styled from 'styled-components'
 //import { Edit } from 'styled-icons/feather'
 
-//import CommentMessage from './CommentMessage'
+ const SubmitBody = styled(Box)`
+    background-color: lightgrey;
+    padding: 30px;
+`
 
-const CommentTitle = styled(Text)`
+const CommentNumber = styled(Text)`
     text-decoration: none;
     font-weight: bold;
+`
+
+const SubmitImage = styled(Image)`
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+`
+
+const NameInput = styled.input`
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
  `
 
- const CommentBody = styled(Box)`
-    background-color: grey;
- `
+const LocationInput = styled.input`
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+`
 
  const MessageInputBox = styled.textarea`
-    padding: 1px;    
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;   
     margin: auto;
+    min-height: 200px;
+    width: 100%;
  `
 
 export class CommentSubmit extends Component {
@@ -51,31 +79,58 @@ export class CommentSubmit extends Component {
 
         return (
             <Box>
-                <CommentBody my={4} p={2}>
-                    <Box>
-                        <Text>{this.props.commentNumberDisplay()}</Text>
-                    </Box>
+                <SubmitBody>
+
                     <Flex>
-                        <input type="text" name="name" id="name"
-                        defaultValue={this.props.defaultName}
+                        <Box>
+                            <CommentNumber>{this.props.commentNumberDisplay()}</CommentNumber>
+                        </Box>
+                    </Flex>
+
+                    <Flex my={2} alignItems='center'>
+                        <Box mr={"10px"} >
+                            <SubmitImage src="https://pm1.narvii.com/6911/ca42a1ec5c1bf2d9251960a08b9cb2d965654123r1-1400-828v2_128.jpg" />
+                        </Box>
+
+                        <NameInput id="name"
+                        autoComplete="off"
+                        name="name" 
+                        type="text"
+                        placeholder={this.props.defaultName}
                         onChange={this.onNameChange.bind(this)} />
 
-                        <input type="text" name="location" id="location"
-                        defaultValue={this.props.defaultLocation}
+                        <LocationInput id="location"
+                        autoComplete="off"
+                        name="location"
+                        type="text" 
+                        placeholder={this.props.defaultLocation}
                         onChange={this.onLocationChange.bind(this)} />
                     </Flex>
-                    <Box>
-                        <MessageInputBox type="text" name="message" id="message" 
-                        rows="4" cols="50"
-                        defaultValue={this.props.defaultMessage}
-                        onChange={this.onMessageChange.bind(this)} />
-                    </Box>
-                    <Flex>
-                        <Button onClick={() => this.props.resetSubmit()}>CANCEL</Button>
-                        <Button onClick={() => this.props.submitComment()}>SUBMIT</Button>
-                    </Flex>
-                </CommentBody>
 
+                    <Flex my={2}>
+                        <MessageInputBox id="message"
+                        name="message"
+                        type="text" 
+                        placeholder={this.props.defaultMessage}
+                        onChange={this.onMessageChange.bind(this)} />
+                    </Flex>
+
+                    <Flex my={2}>
+                        <Button id="cancelComment"
+                        mx={2}
+                        onClick={() => this.props.resetSubmit()}>
+                            CANCEL
+                        </Button>
+                        <Button  id="submitComment"
+                        disabled={this.props.submitButtonDisabled}
+                        bg={this.props.submitButtonDisabled ? 'grey' : 'blue'}
+                        mx={2}
+                        onClick={() => this.props.submitComment()}>
+                            SUBMIT
+                        </Button>
+                    </Flex>
+
+                </SubmitBody>
             </Box>
         );      
     }

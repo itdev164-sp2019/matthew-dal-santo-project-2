@@ -20,59 +20,154 @@ const CommentTitle = styled(Text)`
  `
 
  const CommentBody = styled(Box)`
-    background-color: grey;
+    padding-top: 20px;
+    padding-bottom: 20px;
  `
 
- const MessageInputBox = styled.textarea`
-    padding: 1px;    
-    margin: auto;
- `
+const defaultName = 'Name (required)';
+const defaultLocation = 'Location (required)';
+const defaultMessage = 'Enter your comment here...';
 
 export class Comments extends Component {
+
+    resetSubmit = this.resetSubmit.bind(this);
+    submitComment = this.submitComment.bind(this);
+    commentNumberDisplay = this.commentNumberDisplay.bind(this);
+    changeName = this.changeName.bind(this);
+    changeLocation = this.changeLocation.bind(this);
+    changeMessage = this.changeMessage.bind(this);
+
+    state = {
+        submitName: null,
+        submitLocation: null,
+        submitMessage: null,
+        submitButtonDisabled: true,
+        comments: []
+    };
+    
+    changeName(inputName) {
+        if (!!inputName && !!this.state.submitLocation && !!this.state.submitMessage) {
+            this.setState({
+                submitName: inputName,
+                submitButtonDisabled: false
+            })
+        } else {
+            this.setState({
+                submitName: inputName,
+                submitButtonDisabled: true
+            })
+        }
+    }
+    
+    changeLocation(inputLocation) {
+        if (!!this.state.submitName && !!inputLocation && !!this.state.submitMessage) {
+            this.setState({
+                submitLocation: inputLocation,
+                submitButtonDisabled: false
+            })
+        } else {
+            this.setState({
+                submitLocation: inputLocation,
+                submitButtonDisabled: true
+            })
+        }
+    }
+    
+    changeMessage(inputMessage) {
+        if (!!this.state.submitName && !!this.state.submitLocation && !!inputMessage) {
+            this.setState({
+                submitMessage: inputMessage,
+                submitButtonDisabled: false
+            })
+        } else {
+            this.setState({
+                submitMessage: inputMessage,
+                submitButtonDisabled: true
+            })
+        }
+    }
+    
+    resetSubmit() {
+        this.setState({
+            submitName: null,
+            submitLocation: null,
+            submitMessage: null,
+            submitButtonDisabled: true
+        })
+        document.getElementById('name').value = null; 
+        document.getElementById('location').value = null; 
+        document.getElementById('message').value = null; 
+    }
+    
+    submitComment() {
+        if (!!this.state.submitName && !!this.state.submitLocation && !!this.state.submitMessage) {
+            var updatedComments = this.state.comments;
+            var comment = {
+                key: this.state.comments.length + 1,
+                name: this.state.submitName, 
+                location: this.state.submitLocation, 
+                message: this.state.submitMessage
+            };
+            console.log(comment);
+            updatedComments.push(comment);
+            this.setState({
+                comments: updatedComments
+            })
+        
+            this.resetSubmit();
+        }
+    }
+  
+    commentNumberDisplay() {
+        if (this.state.comments.length < 1) {
+            return 'There are no comments on this article yet.  Be the first to comment!';
+        } else {
+            return 'Comments  ' + this.state.comments.length
+        }
+    }
 
     onNameChange(event) {
         const fieldName = event.target.name;
         const fieldValue = event.target.value;
-        this.props.changeName(fieldValue);
+        this.changeName(fieldValue);
     }
 
     onLocationChange(event) {
         const fieldName = event.target.name;
         const fieldValue = event.target.value;
-        this.props.changeLocation(fieldValue);
+        this.changeLocation(fieldValue);
     }
 
     onMessageChange(event) {
         const fieldName = event.target.name;
         const fieldValue = event.target.value;
-        this.props.changeMessage(fieldValue);
+        this.changeMessage(fieldValue);
     }
 
     render() {
 
         return (
-            <Box>
+            <CommentBody mx={5}>
 
                 <CommentSubmit
-                defaultName={this.props.defaultName}
-                defaultLocation={this.props.defaultLocation}
-                defaultMessage={this.props.defaultMessage}
-                submitName={this.props.submitName}
-                submitLocation={this.props.submitLocation}
-                submitMessage={this.props.submitMessage}
-                comments={this.props.comments}
-                resetSubmit={this.props.resetSubmit}
-                submitComment={this.props.submitComment}
-                commentNumberDisplay={this.props.commentNumberDisplay} 
-                changeName={this.props.changeName}
-                changeLocation={this.props.changeLocation}
-                changeMessage={this.props.changeMessage} />
+                defaultName={defaultName}
+                defaultLocation={defaultLocation}
+                defaultMessage={defaultMessage}
+                submitName={this.state.submitName}
+                submitLocation={this.state.submitLocation}
+                submitMessage={this.state.submitMessage}
+                submitButtonDisabled={this.state.submitButtonDisabled}
+                comments={this.state.comments}
+                resetSubmit={this.resetSubmit}
+                submitComment={this.submitComment}
+                commentNumberDisplay={this.commentNumberDisplay} 
+                changeName={this.changeName}
+                changeLocation={this.changeLocation}
+                changeMessage={this.changeMessage} />
 
-                <CommentMessages comments={this.props.comments}/>
+                <CommentMessages comments={this.state.comments}/>
 
-            </Box>
+            </CommentBody>
         );      
     }
 }
-
-//export default Comments;

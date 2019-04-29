@@ -22,16 +22,18 @@ const CommentTitle = styled(Text)`
 export class CommentMessages extends Component {
     render() {
         return (
-            <Box mt={2}>
-                <Text>Comments:</Text>
-                {this.props.comments.map(comments =>
-                <Box mx={4} my={2}>
-                  <Text>{comments.name}</Text>
-                  <Text>{comments.location}</Text>
-                  <Text>{comments.message}</Text>
+            <Box>
+                <Box>
+                    <CommentTitle my={2}>Comments</CommentTitle>
                 </Box>
+                {this.props.comments.map(comments =>
+                  <Box my={2} bg='lightGrey'>
+                    <Text px={1}>Name: {comments.name}</Text>
+                    <Text px={1}>Location: {comments.location}</Text>
+                    <Text px={1}>Message: {comments.message}</Text>
+                  </Box>
                 )}
-              </Box>
+            </Box>
         );      
     }
 }
