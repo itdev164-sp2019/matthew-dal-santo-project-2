@@ -9,6 +9,7 @@ import {
     Button
   } from 'rebass'
 import styled from 'styled-components'
+import ls from 'local-storage'
 //import { Edit } from 'styled-icons/feather'
 
 import CommentMessages from './CommentMessages'
@@ -42,7 +43,7 @@ export class Comments extends Component {
         submitLocation: null,
         submitMessage: null,
         submitButtonDisabled: true,
-        comments: []
+        comments: ls.get('comments') || []
     };
     
     changeName(inputName) {
@@ -108,11 +109,13 @@ export class Comments extends Component {
                 location: this.state.submitLocation, 
                 message: this.state.submitMessage
             };
-            console.log(comment);
             updatedComments.push(comment);
+
             this.setState({
                 comments: updatedComments
             })
+
+            ls.set('comments', updatedComments);
         
             this.resetSubmit();
         }
