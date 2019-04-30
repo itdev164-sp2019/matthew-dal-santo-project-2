@@ -14,7 +14,7 @@ Project to test the local-storage npm module as a test case for Project 3 using 
 ## Project Planning
 
 ### Story Board
-[local-storage Proof Story Board](https://github.com/itdev164-sp2019/matthew-dal-santo-project-2/projects/1)
+~[local-storage Proof Story Board](https://github.com/itdev164-sp2019/matthew-dal-santo-project-2/projects/1)~
 
 ### Issues
 [As a Student, I Would Like the App to Fulfil All of the Project 2 Requirements so that I Receive a Passing Grade on My Assignment](https://github.com/itdev164-sp2019/matthew-dal-santo-project-2/issues/4)
